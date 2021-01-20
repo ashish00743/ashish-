@@ -1,0 +1,93 @@
+<div class="main-container">
+    <div class="card-container">
+        <h3> Enter Your Card Details</h3>
+        <form [formGroup]="CustomerForm">
+
+            <label>
+          Customer Name:
+          <input type="text" formControlName="name" [ngClass]="CustomerForm.controls['name'].invalid && (CustomerForm.controls['name'].dirty || CustomerForm.controls['name'].touched) ? 'error-input' : 'smart-input'" required>
+          <div *ngIf="CustomerForm.controls['name'].invalid && (CustomerForm.controls['name'].dirty || CustomerForm.controls['name'].touched)"
+          class="alert alert-danger">
+      
+        <div  *ngIf="CustomerForm.controls['name'].errors.required" class="error">
+          *Name is required.
+        </div>
+        </div>
+        </label>
+
+            <label>
+          Credit Card Number:
+          <input type="text" formControlName="creditCardnumber" [ngClass]="CustomerForm.controls['creditCardnumber'].invalid && (CustomerForm.controls['creditCardnumber'].dirty || CustomerForm.controls['creditCardnumber'].touched) ? 'error-input' : 'smart-input'" required>
+          <div *ngIf="CustomerForm.controls['creditCardnumber'].invalid && (CustomerForm.controls['creditCardnumber'].dirty || CustomerForm.controls['creditCardnumber'].touched)"
+          class="alert alert-danger">
+      
+        <div  *ngIf="CustomerForm.controls['creditCardnumber'].errors.required" class="error">
+            *Credit Card Number is required.
+        </div>
+        </div>
+        </label>
+            <label>
+            <label>
+                Expiry Date:
+                <input type="date" formControlName="expiryDate" [ngClass]="CustomerForm.controls['expiryDate'].invalid && (CustomerForm.controls['expiryDate'].dirty || CustomerForm.controls['expiryDate'].touched) ? 'error-input' : 'smart-input'" required>
+                <div *ngIf="CustomerForm.controls['expiryDate'].invalid && (CustomerForm.controls['expiryDate'].dirty || CustomerForm.controls['expiryDate'].touched)"
+          class="alert alert-danger">
+      
+        <div  *ngIf="CustomerForm.controls['expiryDate'].errors.required" class="error">
+            *Expiry Date is required.
+        </div>
+        <div  *ngIf="CustomerForm.controls['expiryDate'].errors.expiryDate" class="error">
+            *Expiry Date should be greater than current date.
+        </div>
+        </div>
+              </label> Security Code:
+            <input type="number" formControlName="securityCode" [ngClass]="CustomerForm.controls['securityCode'].invalid && (CustomerForm.controls['securityCode'].dirty || CustomerForm.controls['securityCode'].touched) ? 'error-input' : 'smart-input'" minlength="3"
+                maxlength="3">
+            <div *ngIf="CustomerForm.controls['securityCode'].invalid && (CustomerForm.controls['securityCode'].dirty || CustomerForm.controls['securityCode'].touched)" class="alert alert-danger">
+
+                <div *ngIf="CustomerForm.controls['securityCode'].errors.securityCode" class="error">
+                    *Security Code should be of 3 digit only.
+                </div>
+            </div>
+            </label>
+            <label>
+            Enter Amount:
+            <input type="number" formControlName="amount" [ngClass]="CustomerForm.controls['amount'].invalid && (CustomerForm.controls['amount'].dirty || CustomerForm.controls['amount'].touched) ? 'error-input' : 'smart-input'" required>
+            <div *ngIf="CustomerForm.controls['amount'].invalid && (CustomerForm.controls['amount'].dirty || CustomerForm.controls['amount'].touched)"
+            class="alert alert-danger">
+        
+          <div  *ngIf="CustomerForm.controls['amount'].errors.required" class="error">
+              *Amount is required.
+          </div>
+          <div  *ngIf="CustomerForm.controls['amount'].errors.amount" class="error">
+            *Amount cannot be 0.
+        </div>
+          </div>
+          </label>
+            <button type="submit" class="submit-button" [disabled]="CustomerForm.invalid" (click)="onSubmit()">Submit</button>
+        </form>
+    </div>
+    <br>
+    <br>
+    <div *ngIf="customerList?.length > 0">
+        <table>
+            <thead>
+                <th> Customer Name</th>
+                <th> Credit Card Number</th>
+                <th> Expiry Date</th>
+                <th>Security Number</th>
+                <th>Amount</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let customer of customerList ; let i=index">
+                    <td> {{customer.name}}</td>
+                    <td> {{customer.creditCardnumber}}</td>
+                    <td> {{customer.expiryDate}}</td>
+                    <td> {{customer.securityCode}}</td>
+                    <td> {{customer.amount}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
